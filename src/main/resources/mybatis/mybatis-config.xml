@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+   <settings>            <!-- <settings>이 없으면 만들어줍니다. -->
+  	 <setting name="cacheEnabled" value="false" />
+     <setting name="jdbcTypeForNull" value="NULL" />
+   </settings>
+
+	<!-- 별칭 -->
+	<typeAliases>
+		<typeAlias type="com.example.demo.vo.UserVO" alias="userVo"/>
+		<typeAlias type="com.example.demo.vo.PagingVO" alias="pagingVo"/>
+
+	</typeAliases>
+
+</configuration>

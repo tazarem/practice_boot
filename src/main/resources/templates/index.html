@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<div th:insert="/partial/head.html::head">
+	<meta charset="UTF-8">
+	<title>메인 페이지</title>
+	</div>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	var alert_text = /*[[ ${alert_text} ]]*/
+	/*]]*/
+
+	$(document).ready(function(){
+		if(alert_text!=null){
+			alert(alert_text)
+		}
+	})
+</script>
+<body>
+<div th:replace="/partial/header.html::header"></div>
+<div class="p-3 df fc as">
+<h2>메인 페이지</h2>
+<span th:text="${server_side_param}" class="mb-2"></span>
+<button class="btn btn-secondary mb-2" onclick="goPage('join')">회원가입 로직</button>
+<button class="btn btn-secondary mb-2" onclick="goPage('login')">로그인 로직</button>
+<button class="btn btn-secondary mb-2" onclick="goPage('test')">텍스트 폼 필터링 테스트</button>
+<a href="http://192.168.1.62:3333/partynote">노트 페이지로 가기</a>
+</div>
+<script>
+function goPage(input){
+	location.href='/'+input
+}
+</script>
+
+</body>
+</html>

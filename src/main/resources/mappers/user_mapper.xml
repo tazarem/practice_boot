@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper">
+    <insert id="joinUser" parameterType="userVo">
+	    insert into users values(
+	    #{user_key},
+		#{user_id},
+		#{user_password},
+		#{user_email},
+		#{user_nickname},
+		default,
+		#{is_cert},
+		#{is_ban},
+		default,
+		default
+	    )
+    </insert>
+    <select id="checkId" parameterType="String" resultType="int">
+    	Select count(*) from users where user_id=#{user_id}
+    </select>
+    <select id="loginUser" parameterType="String" resultType="userVo">
+    	SELECT *
+    	FROM users where user_id=#{user_id} limit 1
+    </select>
+    <select id="getUserList" parameterType="pagingVo" resultType="list">
+        SELECT * FROM users offset #{offset} limit #{limit}
+    </select>
+    <select id="countUser" resultType="int">
+        Select count(*) from users
+    </select>
+    
+    <update id="updateProfile" parameterType="java.util.HashMap">
+    	update users set user_profile=#{saved_file_name}, recent_date=default where user_key=#{user_key}
+    </update>
+    
+    <select id="getUserInfo" parameterType="String" resultType="UserVo">
+    SELECT 
+    	user_key,
+    	user_id,
+    	user_email,
+    	user_nickname,
+    	user_profile,
+    	is_cert,
+    	is_ban,
+    	write_date,
+    	recent_date
+    	FROM users where user_key=#{user_key}
+    </select>
+    
+    <insert id="addAuthRecord" parameterType="java.util.HashMap">
+    insert into email_auth values(default,#{user_key},#{auth_key},default,default)
+    </insert>
+    <update id="expireAllAuth" parameterType="String">
+    update email_auth set is_expired=1 where user_key=#{user_key}
+    </update>
+    <update id="activeLastAuth" parameterType="String">
+        update email_auth set is_expired=0 where user_key=#{user_key} order by auth_seq desc limit 1
+    </update>
+    
+    <select id="getUserAuthRecord" parameterType="String" resultType="java.util.HashMap">
+    SELECT
+	us.user_id AS user_id,
+	ea.auth_seq AS auth_seq,
+	ea.user_key AS user_key,
+	ea.auth_key AS auth_key,
+	ea.auth_start AS auth_start,
+	ea.is_expired AS is_expired
+	FROM 
+	users us inner JOIN email_auth ea
+	ON (us.user_key=ea.user_key)
+	WHERE 
+	us.user_id=#{user_id} and
+	ea.is_expired=0
+    </select>
+    <update id="confirmCert" parameterType="String">
+    update users set is_cert=1 where user_key=#{user_key}
+    </update>
+    <update id="confirmExpired" parameterType="String">
+    update email_auth set is_expired=1 where auth_key=#{auth_key}
+    </update>
+    <delete id="cleanExpired">
+    delete from email_auth where is_expired=1
+    </delete>
+    
+</mapper>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<div th:insert="/partial/head.html::head">
+	<meta charset="UTF-8"/>
+	<title>로그인</title>
+	</div>
+</head>
+<body>
+	<div th:replace="/partial/header.html::header"></div>
+	<div class="p-3 df fc as">
+	<h2>로그인</h2>
+	<form class="df fc" name="loginform" action="/user/doLogin" method="post">
+		<input class="mb-2" placeholder="ID" type="text" name="user_id"/>
+		<input class="mb-2" placeholder="PW" type="password" name="user_password"/>
+		<submit class="btn btn-primary" onclick="loginform.submit()">제출</submit>	
+	</form>
+	</div>
+</body>
+</html>

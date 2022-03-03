@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="textform" action="/filtering" method="post">
+<textarea name="inner_text">
+</textarea>
+<textarea name="inner_script">
+</textarea>
+</form>
+<button onclick="textform.submit()">필터링 테스트하기</button>
+<br>
+<br>
+
+<h3>출력물</h3>
+<textarea th:text="${inner_text}">
+</textarea>
+
+<h3>스크립트 출력물</h3>
+<div th:utext="${inner_script}"></div>
+</body>
+</html>

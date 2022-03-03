@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+<div th:fragment="header">
+	<ul class="nav bg-light p-3">
+	  <li class="nav-item">
+		<button onclick="location.href='/'" class="btn btn-secondary">메인페이지로 가기</button>
+	  </li>
+	
+	  <li class="nav-item">
+	    <a class="nav-link active" aria-current="page" href="#">Active</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="#">Link</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="#">Link</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link disabled">Disabled</a>
+	  </li>
+	  <div th:if="${session.user_nickname!=null}">
+		<span th:text="|${session.user_nickname} 접속 중|" class="mb-2"></span>
+		<div onclick="logout()">로그아웃</div>
+	  </div>
+	  <div th:unless="${session.user_nickname!=null}">
+	  	<span>로그인하세요</span>
+	  </div>
+	</ul>
+	
+</div>

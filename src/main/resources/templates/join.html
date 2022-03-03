@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<div th:insert="/partial/head.html::head">
+	<meta charset="UTF-8"/>
+	<title>회원가입</title>
+	</div>
+<body>
+	<div th:replace="/partial/header.html::header"></div>
+	<div class="p-3 df fc as">
+	<h2>회원가입</h2>
+	<form class="df fc" name="joinform" action="/user/doJoin" method="post">
+	<input class="mb-2" placeholder="ID" type="text" name="user_id"/>
+	<input class="mb-2" placeholder="PW" type="password" name="user_password"/>
+	<input class="mb-2" placeholder="E-mail" type="text" name="user_email"/>
+	<input class="mb-2" placeholder="Nickname" type="text" name="user_nickname"/>
+	<submit class="btn btn-primary" onclick="joinform.submit()">제출</submit>	
+	</form>
+	</div>
+</body>
+</html>
